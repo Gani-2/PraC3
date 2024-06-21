@@ -22,7 +22,18 @@ class GameController extends Controller
 
     public function store(Request $request)
     {
+        // Validatie van de invoer
+        $request->validate([
+            'team1_id' => 'required|integer|exists:teams,id',
+            'team2_id' => 'required|integer|exists:teams,id',
+            'field' => 'required|string|max:255',
+            'referee_id' => 'required|integer|exists:users,id',
+            'time' => 'required|date',
+        ]);
+
+        // Opslaan van het spel
         Game::create($request->all());
+
         return redirect()->route('games.index');
     }
 
@@ -39,7 +50,18 @@ class GameController extends Controller
 
     public function update(Request $request, Game $game)
     {
+        // Validatie van de invoer
+        $request->validate([
+            'team1_id' => 'required|integer|exists:teams,id',
+            'team2_id' => 'required|integer|exists:teams,id',
+            'field' => 'required|string|max:255',
+            'referee_id' => 'required|integer|exists:users,id',
+            'time' => 'required|date',
+        ]);
+
+        // Bijwerken van het spel
         $game->update($request->all());
+
         return redirect()->route('games.index');
     }
 

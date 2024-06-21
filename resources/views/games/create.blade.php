@@ -6,12 +6,20 @@
         <form action="{{ route('games.store') }}" method="POST">
             @csrf
             <div class="form-group">
-                <label for="team1_id">Team 1 ID</label>
-                <input type="text" name="team1_id" id="team1_id" required>
+                <label for="team1_id">Team 1</label>
+                <select name="team1_id" id="team1_id" required>
+                    @foreach ($teams as $team)
+                        <option value="{{ $team->id }}">{{ $team->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
-                <label for="team2_id">Team 2 ID</label>
-                <input type="text" name="team2_id" id="team2_id" required>
+                <label for="team2_id">Team 2</label>
+                <select name="team2_id" id="team2_id" required>
+                    @foreach ($teams as $team)
+                        <option value="{{ $team->id }}">{{ $team->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label for="field">Field</label>
@@ -19,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label for="referee_id">Referee ID</label>
-                <input type="text" name="referee_id" id="referee_id" required>
+                <input type="number" name="referee_id" id="referee_id" required>
             </div>
             <div class="form-group">
                 <label for="time">Time</label>
@@ -54,7 +62,7 @@
             margin-bottom: 5px;
         }
 
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
