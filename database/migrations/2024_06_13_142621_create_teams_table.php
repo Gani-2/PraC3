@@ -17,11 +17,11 @@ class CreateTeamsTable extends Migration
             $table->integer('points');
             $table->unsignedBigInteger('creator_id');
             $table->timestamps();
-    
-            $table->foreign('creator_id')->references('id')->on('users');
+
+            // Commenting out the foreign key constraint for now
+            // $table->foreign('creator_id')->references('id')->on('users');
         });
     }
-    
 
     /**
      * Reverse the migrations.

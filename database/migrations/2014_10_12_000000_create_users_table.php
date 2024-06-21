@@ -21,11 +21,12 @@ return new class extends Migration
             $table->unsignedBigInteger('team_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
-    
-            $table->foreign('team_id')->references('id')->on('teams')->onDelete('set null');
+
+            // Commenting out the foreign key constraint for now
+            // $table->foreign('team_id')->references('id')->on('teams')->onDelete('set null');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('users');
