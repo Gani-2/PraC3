@@ -12,12 +12,27 @@
             padding: 0;
         }
 
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
         .container {
             width: 80%;
             margin: 0 auto;
             padding: 20px;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .header, .footer {
@@ -51,8 +66,30 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>My Laravel App</h1>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <a href="{{ url('/') }}">My Laravel App</a>
+        </div>
+        <div class="navbar-menu">
+            @guest
+                @if (Route::has('login'))
+                    <a href="{{ route('login') }}">Login</a>
+                @endif
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}">Register</a>
+                @endif
+            @else
+                <span>{{ Auth::user()->name }}</span>
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @endguest
+        </div>
     </div>
 
     <div class="container">
